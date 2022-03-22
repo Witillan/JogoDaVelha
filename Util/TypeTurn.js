@@ -1,6 +1,6 @@
 const TypeTurn = {
-    x: 'x',
-    o: 'o'
+    x: 1,
+    o: -1
 }
 
 export default TypeTurn
