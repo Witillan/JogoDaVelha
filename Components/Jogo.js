@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, View, ImageBackground, Image, Text } from 'react-native';
 
@@ -8,7 +8,6 @@ import TypeTurn from '../Util/TypeTurn';
 export default function Jogo() {
   const image = { uri: 'https://apliquefacil.vteximg.com.br/arquivos/ids/156166-1000-1000/papel-de-parede-adesivo-madeira-bege-quarto-relax.jpg?v=636774762025400000' }
   const [turno, setTurn] = useState(1);
-  const [backgroundColor, setBackgroundColor] = useState('black')
 
   const [acumuladorLinhas, setAcumuladorLinhas] = useState([0, 0, 0])
   const [acumuladorColunas, setAcumuladorColunas] = useState([0, 0, 0])
@@ -18,11 +17,24 @@ export default function Jogo() {
   const [vencedor, setVencedor] = useState('')
 
   const navigation = useNavigation()
+  const route = useRoute()
 
   useEffect(() => {
-    console.log('Vencedor: ' + vencedor)
-    navigation.navigate(vencedor)
+    if (vencedor === 'Ninguem') {
+      navigation.navigate('Empate')
+    } else if (vencedor === 1 || vencedor === -1) {
+      navigation.navigate('Ganhador', { vencedor })
+    }
   }, [vencedor])
+
+  useEffect(() => {
+    setAcumuladorJogadas(0)
+    setAcumuladorDiagonal([0, 0])
+    setAcumuladorColunas([0, 0, 0])
+    setAcumuladorLinhas([0, 0, 0])
+    setTurn(1)
+    setVencedor('')
+  }, [])
 
   const getWinner = useCallback((position) => {
     setAcumuladorJogadas(acumuladorJogadas + 1)
