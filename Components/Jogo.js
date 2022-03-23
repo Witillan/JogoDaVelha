@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState, useEffect, useCallback } from 'react';
-import { StyleSheet, View, ImageBackground, Image, Text } from 'react-native';
+import { StyleSheet, View, ImageBackground, Image, Text, SafeAreaView, ScrollView } from 'react-native';
 
 import BoardCell from '../Components/BoardCell';
 import TypeTurn from '../Util/TypeTurn';
@@ -100,75 +100,77 @@ export default function Jogo() {
   }, [acumuladorJogadas, setAcumuladorJogadas, setVencedor, acumuladorDiagonal, acumuladorColunas, acumuladorLinhas, turno])
 
   return (
-    <View style={styles.outside}>
-      <ImageBackground
-        style={styles.outside}
-        source={image}
-        resizeMode="cover"
-      >
-        <View style={styles.board}>
-          <View style={styles.containerrow}>
-            <BoardCell
-              turno={turno}
-              setTurn={setTurn}
-              onPress={() => getWinner([0, 0])}
-              style={{ borderTop: 0, borderLeft: 0 }}
-            />
-            <BoardCell
-              turno={turno}
-              setTurn={setTurn}
-              onPress={() => getWinner([0, 1])}
-              style={{ borderTop: 0 }}
-            />
-            <BoardCell
-              turno={turno}
-              setTurn={setTurn}
-              onPress={() => getWinner([0, 2])}
-              style={{ borderTop: 0, borderRight: 0 }}
-            />
+    <ScrollView contentContainerStyle={styles.outside}>
+      <View style={styles.outside}>
+        <ImageBackground
+          style={styles.outside}
+          source={image}
+          resizeMode="cover"
+        >
+          <View style={styles.board}>
+            <View style={styles.containerrow}>
+              <BoardCell
+                turno={turno}
+                setTurn={setTurn}
+                onPress={() => getWinner([0, 0])}
+                style={{ borderTop: 0, borderLeft: 0 }}
+              />
+              <BoardCell
+                turno={turno}
+                setTurn={setTurn}
+                onPress={() => getWinner([0, 1])}
+                style={{ borderTop: 0 }}
+              />
+              <BoardCell
+                turno={turno}
+                setTurn={setTurn}
+                onPress={() => getWinner([0, 2])}
+                style={{ borderTop: 0, borderRight: 0 }}
+              />
+            </View>
+            <View style={styles.containerrow}>
+              <BoardCell
+                turno={turno}
+                setTurn={setTurn}
+                onPress={() => getWinner([1, 0])}
+                style={{ borderLeft: 0 }}
+              />
+              <BoardCell
+                turno={turno}
+                setTurn={setTurn}
+                onPress={() => getWinner([1, 1])}
+              />
+              <BoardCell
+                turno={turno}
+                setTurn={setTurn}
+                onPress={() => getWinner([1, 2])}
+                style={{ borderRight: 0 }}
+              />
+            </View>
+            <View style={styles.containerrow}>
+              <BoardCell
+                turno={turno}
+                setTurn={setTurn}
+                onPress={() => getWinner([2, 0])}
+                style={{ borderBottom: 0, borderLeft: 0 }}
+              />
+              <BoardCell
+                turno={turno}
+                setTurn={setTurn}
+                onPress={() => getWinner([2, 1])}
+                style={{ borderBottom: 0 }}
+              />
+              <BoardCell
+                turno={turno}
+                setTurn={setTurn}
+                onPress={() => getWinner([2, 2])}
+                style={{ borderBottom: 0, borderRight: 0 }}
+              />
+            </View>
           </View>
-          <View style={styles.containerrow}>
-            <BoardCell
-              turno={turno}
-              setTurn={setTurn}
-              onPress={() => getWinner([1, 0])}
-              style={{ borderLeft: 0 }}
-            />
-            <BoardCell
-              turno={turno}
-              setTurn={setTurn}
-              onPress={() => getWinner([1, 1])}
-            />
-            <BoardCell
-              turno={turno}
-              setTurn={setTurn}
-              onPress={() => getWinner([1, 2])}
-              style={{ borderRight: 0 }}
-            />
-          </View>
-          <View style={styles.containerrow}>
-            <BoardCell
-              turno={turno}
-              setTurn={setTurn}
-              onPress={() => getWinner([2, 0])}
-              style={{ borderBottom: 0, borderLeft: 0 }}
-            />
-            <BoardCell
-              turno={turno}
-              setTurn={setTurn}
-              onPress={() => getWinner([2, 1])}
-              style={{ borderBottom: 0 }}
-            />
-            <BoardCell
-              turno={turno}
-              setTurn={setTurn}
-              onPress={() => getWinner([2, 2])}
-              style={{ borderBottom: 0, borderRight: 0 }}
-            />
-          </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </ScrollView>
   );
 }
 
